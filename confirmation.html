@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirmation - Commande réussie</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .confirmation-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f5f5f5;
+      text-align: center;
+    }
+
+    .confirmation-box {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .confirmation-box h1 {
+      color: #4CAF50;
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .confirmation-box p {
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+
+    .confirmation-box .product-info {
+      margin: 30px 0;
+    }
+
+    .confirmation-box .product-info img {
+      width: 150px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .confirmation-box .button {
+      margin-top: 20px;
+      padding: 15px 30px;
+      background-color: #008CBA;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 1em;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .confirmation-box .button:hover {
+      background-color: #005fa3;
+    }
+  </style>
+</head>
+<body>
+  <div class="confirmation-container">
+    <div class="confirmation-box">
+      <h1>✅ Commande réussie !</h1>
+      <p>Merci pour votre commande. Nous avons bien reçu votre paiement et votre produit sera expédié sous peu.</p>
+      <div class="product-info">
+        <h3>Résumé de la commande</h3>
+        <img src="" id="confirmation-product-image" alt="Image du produit">
+        <p><strong>Produit :</strong> <span id="confirmation-product-name"></span></p>
+        <p><strong>Pointure :</strong> <span id="confirmation-product-size"></span></p>
+        <p><strong>Couleur :</strong> <span id="confirmation-product-color"></span></p>
+        <p><strong>Prix :</strong> €<span id="confirmation-product-price"></span></p>
+      </div>
+      <a href="index.html" class="button">Retour à l'accueil</a>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const produit = urlParams.get('produit');
+      const prix = urlParams.get('prix');
+      const size = urlParams.get('size');
+      const color = urlParams.get('color');
+
+      const productImage = document.querySelector('#confirmation-product-image');
+      const productName = document.querySelector('#confirmation-product-name');
+      const productPrice = document.querySelector('#confirmation-product-price');
+      const productSize = document.querySelector('#confirmation-product-size');
+      const productColor = document.querySelector('#confirmation-product-color');
+
+      if (produit && prix) {
+        productName.textContent = produit;
+        productPrice.textContent = prix;
+        productSize.textContent = size;
+        productColor.textContent = color;
+
+        // Affichage de l'image du produit en fonction du nom
+        if (produit === 'Asic-Gel-NYC') {
+          productImage.src = 'jd_751785_a-removebg-preview.png';
+        } else if (produit === 'air-force') {
+          productImage.src = 'Capture_d_écran_7-5-2025_162432_www.footlocker.fr-removebg-preview.png';
+        } else if (produit === 'New-balance-550') {
+          productImage.src = 'W_NIKE_P-6000_SE-removebg-preview.png';
+        } else if (produit === 'Nike-Show-TL') {
+          productImage.src = 'image-removebg-preview.png';
+        }
+      }
+    };
+  </script>
+</body>
+</html>

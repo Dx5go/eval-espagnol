@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Paiement - Chaussure</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Styles globaux */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .payment-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    .payment-card {
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+      padding: 30px;
+      box-sizing: border-box;
+    }
+
+    .payment-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .payment-header h1 {
+      font-size: 24px;
+      color: #333;
+    }
+
+    .payment-header p {
+      font-size: 16px;
+      color: #777;
+    }
+
+    .product-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .product-info img {
+      width: 80px;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .product-info div {
+      flex-grow: 1;
+      margin-left: 15px;
+    }
+
+    .product-info h2 {
+      font-size: 18px;
+      color: #333;
+    }
+
+    .product-info p {
+      font-size: 14px;
+      color: #777;
+    }
+
+    .payment-methods {
+      margin-bottom: 20px;
+    }
+
+    .payment-methods button {
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+      color: #fff;
+      background-color: #4CAF50;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      transition: background-color 0.3s;
+    }
+
+    .payment-methods button:hover {
+      background-color: #45a049;
+    }
+
+    .payment-form {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .payment-form input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .payment-form button {
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+      color: #fff;
+      background-color: #008CBA;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .payment-form button:hover {
+      background-color: #007bb5;
+    }
+  </style>
+</head>
+<body>
+  <div class="payment-container">
+    <div class="payment-card">
+      <div class="payment-header">
+        <h1>Finalisez votre achat</h1>
+        <p>Veuillez vérifier les informations ci-dessous avant de procéder au paiement.</p>
+      </div>
+
+      <div class="product-info">
+        <img src="" id="product-image" alt="Produit">
+        <div>
+          <h2 id="product-name">Produit</h2>
+          <p id="product-size">Pointure : </p>
+          <p id="product-color">Couleur : </p>
+          <p>Prix: €<span id="product-price"></span></p>
+        </div>
+      </div>
+
+      <div class="payment-methods">
+        <button id="payCardBtn">Payer par carte</button>
+        <button id="payPaypalBtn">Payer par PayPal</button>
+      </div>
+
+      <div class="payment-form" id="payment-form">
+        <h3>Formulaire de paiement</h3>
+        <input type="text" placeholder="Numéro de carte" id="card-number" />
+        <input type="text" placeholder="Date d'expiration (MM/AA)" id="expiration-date" />
+        <input type="text" placeholder="Code de sécurité" id="security-code" />
+        <button>Payer</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const produit = urlParams.get('produit');
+      const prix = urlParams.get('prix');
+      const size = urlParams.get('size');
+      const color = urlParams.get('color');
+
+      const productImage = document.querySelector('#product-image');
+      const productName = document.querySelector('#product-name');
+      const productPrice = document.querySelector('#product-price');
+      const productSize = document.querySelector('#product-size');
+      const productColor = document.querySelector('#product-color');
+
+      // Affichage des informations du produit
+      if (produit && prix) {
+        productName.textContent = produit;
+        productPrice.textContent = prix;
+        productSize.textContent += size;
+        productColor.textContent += color;
+
+        if (produit === 'Asic-Gel-NYC') {
+          productImage.src = 'jd_751785_a-removebg-preview.png';
+        } else if (produit === 'air-force') {
+          productImage.src = 'Capture_d_écran_7-5-2025_162432_www.footlocker.fr-removebg-preview.png';
+        } else if (produit === 'New-balance-550') {
+          productImage.src = 'W_NIKE_P-6000_SE-removebg-preview.png';
+        } else if (produit === 'Nike-Show-TL') {
+          productImage.src = 'image-removebg-preview.png';
+        }
+      }
+    };
+
+    document.getElementById('payCardBtn').addEventListener('click', function() {
+      document.getElementById('payment-form').style.display = 'flex';
+    });
+
+    document.getElementById('payPaypalBtn').addEventListener('click', function() {
+      alert('Vous avez choisi PayPal pour le paiement.');
+    });
+  </script>
+<script>
+  window.onload = function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const produit = urlParams.get('produit');
+    const prix = urlParams.get('prix');
+    const size = urlParams.get('size');
+    const color = urlParams.get('color');
+
+    const productImage = document.querySelector('#product-image');
+    const productName = document.querySelector('#product-name');
+    const productPrice = document.querySelector('#product-price');
+    const productSize = document.querySelector('#product-size');
+    const productColor = document.querySelector('#product-color');
+
+    // Affichage des informations du produit
+    if (produit && prix) {
+      productName.textContent = produit;
+      productPrice.textContent = prix;
+      productSize.textContent += size;
+      productColor.textContent += color;
+
+      if (produit === 'Asic-Gel-NYC') {
+        productImage.src = 'jd_751785_a-removebg-preview.png';
+      } else if (produit === 'air-force') {
+        productImage.src = 'Capture_d_écran_7-5-2025_162432_www.footlocker.fr-removebg-preview.png';
+      } else if (produit === 'New-balance-550') {
+        productImage.src = 'W_NIKE_P-6000_SE-removebg-preview.png';
+      } else if (produit === 'Nike-Show-TL') {
+        productImage.src = 'image-removebg-preview.png';
+      }
+    }
+  };
+
+  // Afficher le formulaire de paiement au clic sur "Payer par carte"
+  document.getElementById('payCardBtn').addEventListener('click', function() {
+    document.getElementById('payment-form').style.display = 'flex'; // Afficher le formulaire
+  });
+
+  // Écouteur d'événements pour le bouton "Payer" dans le formulaire de paiement
+  document.querySelector('.payment-form button').addEventListener('click', function(event) {
+    event.preventDefault(); // Empêche l'envoi du formulaire par défaut
+
+    // Récupérer les paramètres de l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const produit = urlParams.get('produit');
+    const prix = urlParams.get('prix');
+    const size = urlParams.get('size');
+    const color = urlParams.get('color');
+
+    // Valider les champs de paiement (par exemple, numéro de carte)
+    const cardNumber = document.getElementById('card-number').value;
+    const expirationDate = document.getElementById('expiration-date').value;
+    const securityCode = document.getElementById('security-code').value;
+
+    // Vous pouvez ajouter une validation basique ici (par exemple, vérifier que les champs ne sont pas vides)
+    if (cardNumber && expirationDate && securityCode) {
+      // Si tout est validé, rediriger vers la page de confirmation
+      window.location.href = `confirmation.html?produit=${produit}&prix=${prix}&size=${size}&color=${color}`;
+    } else {
+      alert('Veuillez remplir tous les champs de paiement!');
+    }
+  });
+
+  // Écouteur d'événements pour le bouton "Payer par PayPal"
+  document.getElementById('payPaypalBtn').addEventListener('click', function() {
+    alert('Vous avez choisi PayPal pour le paiement.');
+  });
+</script>
+</body>
+</html>

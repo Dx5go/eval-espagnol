@@ -1,0 +1,432 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: #f4f4f4;
+  color: #333;
+  padding: 40px 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 3em;
+  margin-bottom: 50px;
+  color: #111;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+h1::after {
+  content: '';
+  width: 100px;
+  height: 4px;
+  background-color: #010000;
+  display: block;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  width: 280px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 460px;
+  flex-grow: 1;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  margin: 15px 0;
+}
+
+.card h4 {
+  font-size: 1.4em;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.card p {
+  margin: 6px 0;
+}
+
+.card ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: left;
+  margin-top: 10px;
+  flex-grow: 1;
+  height: 120px;
+  overflow-y: auto;
+}
+
+.card ul li {
+  margin-bottom: 6px;
+  padding-left: 1.2em;
+  position: relative;
+}
+
+.card ul li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #29f700;
+}
+
+.btn-order {
+  background-color: #020000;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-order:hover {
+  background-color: #4b4040;
+}
+
+footer {
+  text-align: center;
+  margin-top: 60px;
+  font-size: 0.9em;
+  color: #777;
+}
+
+/* -------- NOUVELLES PARTIES POUR LE FORMULAIRE DE PAIEMENT -------- */
+.payment-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.payment-buttons button {
+  padding: 12px;
+  border-radius: 30px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+}
+
+#card-form {
+  display: none;
+  margin-top: 20px;
+}
+
+#card-form input {
+  display: block;
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 100%;
+}
+/* === COMMANDE PAGE STYLING === */
+.commande-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.commande-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-between;
+}
+
+.commande-shipping,
+.commande-options {
+  flex: 1;
+  min-width: 250px;
+}
+
+.commande-image {
+  flex: 1;
+  text-align: center;
+  min-width: 250px;
+}
+
+.commande-image img {
+  width: 100%;
+  max-width: 300px;
+  object-fit: contain;
+}
+
+h1.product-title {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 30px;
+}
+
+.shipping-info p {
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+/* Taille */
+.size-selection h4,
+.color-selection h4 {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+
+.size-options, .color-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.size {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  transition: 0.3s;
+}
+
+.size:hover {
+  background-color: #e0e0e0;
+}
+
+.size.selected {
+  background-color: black;
+  color: white;
+  border: 1px solid #000;
+}
+
+.size.unavailable {
+  background-color: #eee;
+  color: #aaa;
+  cursor: not-allowed;
+  border-style: dashed;
+}
+
+/* Couleurs */
+.color-option {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: #f1f1f1;
+  transition: 0.3s;
+}
+
+.color-option:hover {
+  background-color: #e1e1e1;
+}
+
+.color-option.selected {
+  background-color: black;
+  color: white;
+  border: 1px solid #000;
+}
+
+/* Bouton commander */
+#order-summary {
+  margin-top: 20px;
+  font-size: 1.2em;
+}
+/* === PAGE DE PAIEMENT === */
+.payment-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 50px;
+  background-color: #f4f4f4;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 40px auto;
+  gap: 40px;
+}
+
+.payment-info {
+  flex: 1;
+  text-align: center;
+}
+
+.payment-info img {
+  width: 260px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.payment-info h2 {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+}
+
+.payment-info p {
+  margin: 5px 0;
+  font-size: 1.1em;
+}
+
+.payment-buttons {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.payment-buttons button {
+  margin: 10px 0;
+  padding: 14px 28px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  border-radius: 30px;
+  transition: 0.3s;
+  width: 100%;
+  max-width: 300px;
+}
+
+#payCardBtn {
+  background-color: #111;
+  color: white;
+}
+
+#payCardBtn:hover {
+  background-color: #333;
+}
+
+#payPaypalBtn {
+  background-color: #ffc439;
+  color: #111;
+}
+
+#payPaypalBtn:hover {
+  background-color: #e6b800;
+}
+
+.payment-form {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 30px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 350px;
+}
+
+.payment-form h3 {
+  margin-bottom: 15px;
+  font-size: 1.4em;
+}
+
+.payment-form input {
+  margin: 10px 0;
+  padding: 10px;
+  width: 100%;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.payment-form button {
+  margin-top: 15px;
+  padding: 12px 20px;
+  font-size: 1em;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.payment-form button:hover {
+  background-color: #005fa3;
+}
+/* === Pointures === */
+.size {
+  display: inline-block;
+  padding: 10px;
+  margin: 5px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.size:hover {
+  background-color: #29f700;
+  color: white;
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.size.selected {
+  background-color: #020000;
+  color: white;
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+/* === Couleurs === */
+.color-option {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2em;
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.color-option:hover {
+  background-color: #29f700;
+  color: white;
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.color-option.selected {
+  background-color: #020000;
+  color: white;
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}

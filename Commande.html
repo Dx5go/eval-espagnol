@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Commande - ASICS GEL-NYC</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="commande-container">
+    <!-- En-tête avec titre -->
+    <h1 class="product-title" id="product-name">Produit</h1>
+
+    <div class="commande-content">
+      <!-- Infos de livraison à gauche -->
+      <div class="commande-shipping">
+        <div class="shipping-info">
+          <p>🚚 Livraison gratuite</p>
+          <p>↩️ Retour sous 30 jours</p>
+          <p>🔒 Paiement sécurisé</p>
+          <p>⚠️ Stock limité : plus que 5 exemplaires</p>
+          <p>📦 Livraison estimée : 16 au 20 mai</p>
+        </div>
+      </div>
+
+      <!-- Image au centre -->
+      <div class="commande-image">
+        <img src="" id="product-image" alt="Produit">
+      </div>
+
+      <!-- Options à droite -->
+      <div class="commande-options">
+        <!-- Pointures -->
+        <div class="size-selection">
+          <h4>Choisissez votre pointure</h4>
+          <div class="size-options">
+            <div class="size" onclick="selectSize(this)">27</div>
+            <div class="size" onclick="selectSize(this)">28</div>
+            <div class="size" onclick="selectSize(this)">29</div>
+            <div class="size" onclick="selectSize(this)">30</div>
+            <div class="size" onclick="selectSize(this)">31</div>
+            <div class="size" onclick="selectSize(this)">32</div>
+            <div class="size unavailable" onclick="selectSize(this)">33</div>
+            <div class="size" onclick="selectSize(this)">34</div>
+            <div class="size" onclick="selectSize(this)">35</div>
+            <div class="size unavailable" onclick="selectSize(this)">36</div>
+            <div class="size" onclick="selectSize(this)">37</div>
+            <div class="size" onclick="selectSize(this)">38</div>
+            <div class="size" onclick="selectSize(this)">39</div>
+            <div class="size" onclick="selectSize(this)">40</div>
+            <div class="size" onclick="selectSize(this)">41</div>
+            <div class="size" onclick="selectSize(this)">42</div>
+            <div class="size" onclick="selectSize(this)">43</div>
+            <div class="size" onclick="selectSize(this)">44</div>
+            <div class="size unavailable" onclick="selectSize(this)">45</div>
+          </div>
+        </div>
+
+        <!-- Couleurs -->
+        <div class="color-selection">
+          <h4>Couleurs disponibles</h4>
+          <div class="color-options">
+            <div class="color-option" onclick="selectColor(this)">Blanc</div>
+            <div class="color-option" onclick="selectColor(this)">Noir</div>
+            <div class="color-option" onclick="selectColor(this)">Bleu</div>
+          </div>
+        </div>
+
+        <!-- Finaliser la commande -->
+        <div id="order-summary">
+          <p>Prix: €<span id="product-price"></span></p>
+          <button class="btn-order">Commander</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let selectedSize = '';
+    let selectedColor = '';
+    let produit = '';
+    let prix = '';
+
+    window.onload = function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const produitParam = urlParams.get('produit');
+      const prixParam = urlParams.get('prix');
+
+      const productTitle = document.querySelector('#product-name');
+      const productPrice = document.querySelector('#product-price');
+      const productImage = document.querySelector('#product-image');
+
+      if (produitParam && prixParam) {
+        produit = produitParam;
+        prix = prixParam;
+        productTitle.textContent = produit;
+        productPrice.textContent = prix;
+
+        if (produit === 'Asic-Gel-NYC') {
+          productImage.src = 'jd_751785_a-removebg-preview.png';
+        } else if (produit === 'air-force') {
+          productImage.src = 'Capture_d_écran_7-5-2025_162432_www.footlocker.fr-removebg-preview.png';
+        } else if (produit === 'New-balance-550') {
+          productImage.src = 'W_NIKE_P-6000_SE-removebg-preview.png';
+        } else if (produit === 'Nike-Show-TL') {
+          productImage.src = 'image-removebg-preview.png';
+        }
+      }
+    };
+
+    function selectSize(sizeElement) {
+      if (!sizeElement.classList.contains('unavailable')) {
+        const sizes = document.querySelectorAll('.size');
+        sizes.forEach(size => size.classList.remove('selected'));
+        sizeElement.classList.add('selected');
+        selectedSize = sizeElement.textContent;
+      }
+    }
+
+    function selectColor(colorElement) {
+      const colors = document.querySelectorAll('.color-option');
+      colors.forEach(color => color.classList.remove('selected'));
+      colorElement.classList.add('selected');
+      selectedColor = colorElement.textContent;
+    }
+
+    document.querySelector('.btn-order').addEventListener('click', function() {
+      if (selectedSize && selectedColor) {
+        window.location.href = `payment.html?produit=${produit}&prix=${prix}&size=${selectedSize}&color=${selectedColor}`;
+      } else {
+        alert('Veuillez sélectionner une pointure et une couleur !');
+      }
+    });
+  </script>
+</body>
+</html>
